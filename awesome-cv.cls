@@ -380,7 +380,7 @@
 %                Commands for utilities
 %-------------------------------------------------------------------------------
 % Use to align an element of tabular table
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
@@ -411,13 +411,13 @@
     \vspace{-0.5mm}
     \headersocialstyle{
       \newbool{isstart}
-%      \setbool{isstart}{true}
-%      \ifthenelse{\isundefined{\@mobile}}
-%        {}
-%        {
-%          \faMobile\ \@mobile
-%          \setbool{isstart}{false}
-%        }
+     \setbool{isstart}{true}
+     \ifthenelse{\isundefined{\@mobile}}
+       {}
+       {
+         \faMobile\ \@mobile
+         \setbool{isstart}{false}
+       }
       \ifthenelse{\isundefined{\@email}}
         {}
         {
@@ -425,7 +425,7 @@
             {
               \setbool{istart}{false} 
             }
-            %{\@headersocialsep}
+            {\@headersocialsep}
           \href{mailto:\@email}{\faEnvelope\ \@email}
         }
       \ifthenelse{\isundefined{\@homepage}}
@@ -513,7 +513,7 @@
 % Define a section for CV
 % Usage: \cvsection{<section-title>}
 \newcommand{\cvsection}[1]{
-  \par\addvspace{1.5ex}
+  \par\addvspace{-0.5ex}
   \phantomsection{}
   \sectionstyle{#1}
   \color{gray}\vhrulefill{0.9pt}
@@ -543,7 +543,9 @@
       {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
       {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
       \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-    \multicolumn{2}{L{17cm}}{\descriptionstyle{#5}} \\
+    \if\relax\detokenize{#5}\relax\else
+      \multicolumn{2}{L{17cm}}{\descriptionstyle{#5}}\vspace{-1.0ex} \\
+    \fi
   \end{tabular*}
 }
 
@@ -593,7 +595,7 @@
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{15.2cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l L{14.2cm}}
 }{
     \end{tabular*}
   \end{center}
